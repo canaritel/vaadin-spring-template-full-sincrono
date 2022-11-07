@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,7 +30,8 @@ public class Book extends Base {
     private String title;
 
     @Nonnull
-    private int number;
+    @Indexed(unique = true)
+    private String isbn;
 
     @Nonnull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

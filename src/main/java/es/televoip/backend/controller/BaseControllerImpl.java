@@ -29,6 +29,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getId {}", entity);
             return entity;
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getId method", HttpStatus.NOT_FOUND);
         }
     }
@@ -40,6 +41,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getAll");
             return service.getAll();
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getAll method", HttpStatus.NOT_FOUND);
         }
     }
@@ -51,6 +53,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getAllPageable");
             return service.getAllPageable(page);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getAllPageable method", HttpStatus.NOT_FOUND);
         }
     }
@@ -62,8 +65,8 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST save {}", entity);
             service.setSave(entity);
         } catch (Exception e) {
-            System.err.println(e.getLocalizedMessage());
-            //throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
+            log.error(e.getLocalizedMessage());
+            throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -74,6 +77,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST update {}", entity);
             service.setUpdate(id, entity);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in update method", HttpStatus.NOT_FOUND);
         }
     }
@@ -86,6 +90,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST delete {}", entity);
             service.setDelete(id);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in delete method", HttpStatus.NOT_FOUND);
         }
     }

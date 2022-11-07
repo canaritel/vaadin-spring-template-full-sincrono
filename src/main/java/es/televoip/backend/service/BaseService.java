@@ -5,9 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public interface BaseService<E extends Base, ID extends Serializable> {
 
     public E getById(ID id) throws Exception;

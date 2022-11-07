@@ -29,6 +29,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             Optional<E> optional = baseRepository.findById(id);
             return optional.get();
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getLocalizedMessage());
         }
     }
@@ -38,6 +39,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             return baseRepository.insert(entity); ////////////////
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -49,6 +51,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             E objectTmp = optional.get(); // comprobamos existe el objeto sino saltará error
             return baseRepository.save(entity);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -60,6 +63,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             baseRepository.delete(optional.get());
             return true;
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -69,6 +73,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             return baseRepository.count();
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -78,6 +83,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             return baseRepository.findAll();
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -87,6 +93,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             return baseRepository.findAll(sort);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
@@ -96,6 +103,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
         try {
             return baseRepository.findAll(page).toList();
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
         }
     }
