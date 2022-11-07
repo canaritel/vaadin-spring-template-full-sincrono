@@ -1,3 +1,5 @@
-# Example app showing how to handle long-running backend tasks asynchronously in Vaadin Flow 14
+# Proyecto realizado en Spring Boot y Vaadin #
 
-YT video: https://youtu.be/ZywjOZYWBuQ
+Plantilla completa de Crud y Controller siguiendo las mejores prácticas y haciendo uso de diversos patrones. **Proyecto base**
+Base de datos en MongoDB con varios tipos de relaciones. **Distintos tipos de relaciones entre documentos**
+Querys realizadas en Spring Data, sin tener que hacer uso de las Querys nativas de MongoDB. **Facilidad de implementación**
