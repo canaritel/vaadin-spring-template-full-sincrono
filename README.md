@@ -5,7 +5,7 @@
 - **Distintos tipos de relaciones entre documentos**: Base de datos en MongoDB con varios tipos de relaciones.
 
 - **Facilidad de implementación**: Querys realizadas en Spring Data, sin tener que hacer uso de las Querys nativas de MongoDB.
-Intefaces e implementaciones fáciles de editar y ampliar.
+Interfaces e implementaciones fáciles de editar y ampliar.
 
 ## Running the application
 
