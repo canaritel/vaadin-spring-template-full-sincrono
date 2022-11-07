@@ -1,4 +1,4 @@
-package es.televoip.components;
+package es.televoip.component;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

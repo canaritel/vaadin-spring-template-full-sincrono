@@ -12,7 +12,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import es.televoip.components.PrintText;
+import es.televoip.component.PrintText;
 
 @Route(value = "", layout = MainView.class)
 public class HelloWorldView extends VerticalLayout {

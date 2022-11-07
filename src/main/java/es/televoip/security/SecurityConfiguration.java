@@ -1,4 +1,4 @@
-package es.televoip.backend.security;
+package es.televoip.security;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.springframework.context.annotation.Bean;

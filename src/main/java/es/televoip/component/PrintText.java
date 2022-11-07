@@ -1,4 +1,4 @@
-package es.televoip.components;
+package es.televoip.component;
 
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.Notification.Position;
