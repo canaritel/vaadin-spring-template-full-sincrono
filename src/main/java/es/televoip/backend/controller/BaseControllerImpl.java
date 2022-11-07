@@ -62,7 +62,8 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST save {}", entity);
             service.setSave(entity);
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
+            System.err.println(e.getLocalizedMessage());
+            //throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
         }
     }
 

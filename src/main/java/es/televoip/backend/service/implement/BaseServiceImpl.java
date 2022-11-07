@@ -9,10 +9,12 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Transactional
+@Service
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
 
     protected BaseRepository<E, ID> baseRepository;
@@ -34,7 +36,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     @Override
     public E setSave(E entity) throws Exception {
         try {
-            return baseRepository.insert(entity);
+            return baseRepository.insert(entity); ////////////////
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

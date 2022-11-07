@@ -4,23 +4,18 @@ import javax.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /*
-*** Más información sobre Auditable en este enlace:
-*** https://medium.com/codex/spring-data-mongodb-auditing-b4a874442a6
+*** Este métono no tendrá *Repository* ni *Sercices* [[Embebido]]
+*** Para el acceso a estos datos se realizará desde el documento que lo tiene relacionado
  */
 @Data  // es equivalente a usar @ToString, @EqualsAndHashCode, @Getter, @Setter, @RequiredArgsConstrutor al mismo tiempo
 @NoArgsConstructor  // genera un constructor sin parámetros
 @AllArgsConstructor  // genera un constructor con un parámetro para cada campo en su clase
 @Builder  // se utiliza en clases, constructores y métodos para proporcionarle API de compilador complejas
-@EqualsAndHashCode(callSuper = false)
-@Document
-public class Address extends Base {
+public class Address {
 
     @Nonnull
     private String street;
@@ -30,10 +25,5 @@ public class Address extends Base {
 
     @Nonnull
     private int postalCode;
-
-    // -------------------- //
-    @Nonnull
-    @DBRef(lazy = true)
-    private Location location;
 
 }

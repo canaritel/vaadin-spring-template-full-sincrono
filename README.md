@@ -38,7 +38,7 @@ Once the JAR file is built, you can run it using
 - `backend` folder in `src/main/java/es/televoip` contains the data methods for application: Include `controller` `entity` 
 `exception` `mapper` `repository` `service`.
 - `security` folder in `src/main/java/es/televoip` contains the data methods for security application.
-- `component` folder in `src/main/java/es/televoip` contains methods and utilities for application
+- `component` folder in `src/main/java/es/televoip` contains methods and utilities for application.
 
 ## Useful links
 

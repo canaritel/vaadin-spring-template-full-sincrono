@@ -34,12 +34,12 @@ public class Person extends Base {
     private String lastName;
 
     @Nonnull
-    //@Indexed(unique = true)
+    @Indexed(unique = true)
     private String dni;
 
     @Email
     @Nonnull
-    //@Indexed(unique = true)
+    @Indexed(unique = true)
     private String email;
 
     @Nonnull
@@ -54,8 +54,11 @@ public class Person extends Base {
     private boolean important;
 
     // -------------------------------- //
+    // Embebido no lleva la anotación @DBRef
+    private Address address; // es Embebido
+
     @DBRef(lazy = true)
-    private Location location; // es como One-To-Many
+    private Location location; // similar a One-To-One
 
     @DBRef(lazy = true)
     private List<Book> books; // es como One-To-Many
