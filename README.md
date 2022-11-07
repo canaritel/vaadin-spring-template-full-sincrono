@@ -36,7 +36,8 @@ Once the JAR file is built, you can run it using
 - `views` folder in `frontend/` contains the client-side JavaScript views of your application.
 - `themes` folder in `frontend/` contains the custom CSS styles.
 - `backend` folder in `src/main/java/es/televoip` contains the data methods for application: Include `controller` `entity` 
-`exception` `mapper` `repository` `service`
+`exception` `mapper` `repository` `service`.
+- `security` folder in `src/main/java/es/televoip` contains the data methods for security application.
 
 ## Useful links
 
