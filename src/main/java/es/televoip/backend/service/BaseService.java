@@ -3,10 +3,10 @@ package es.televoip.backend.service;
 import es.televoip.backend.entity.Base;
 import java.io.Serializable;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-//@Service
 public interface BaseService<E extends Base, ID extends Serializable> {
 
     public E getById(ID id) throws Exception;
@@ -23,6 +23,6 @@ public interface BaseService<E extends Base, ID extends Serializable> {
 
     public List<E> getAllSort(Sort sort) throws Exception;
 
-    public List<E> getAllPageable(Pageable page) throws Exception;
+    public Page<E> getAllPageable(Pageable page) throws Exception;
 
 }

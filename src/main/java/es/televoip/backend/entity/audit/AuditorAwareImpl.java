@@ -4,12 +4,13 @@ import java.util.Optional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.AuditorAware;
 
 /*
 *** Más información sobre Auditable en este enlace:
 *** https://medium.com/codex/spring-data-mongodb-auditing-b4a874442a6
  */
-public class AuditorAwareImpl implements org.springframework.data.domain.AuditorAware<String> {
+public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {

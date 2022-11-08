@@ -6,6 +6,7 @@ import es.televoip.backend.service.implement.BaseServiceImpl;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Slf4j
+@Slf4j // nos permite enviar texto a la consola mediante "log"
+//@Component // lo anoto como Component (permite a Spring detectar los beans y colocarlos dentro de su contexto para ser utilizados) **************************
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, String>> implements BaseController<E, String> {
 
     @Autowired
@@ -46,9 +48,9 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
         }
     }
 
-    @GetMapping("/page/{page}") // solicitud GET, obtener datos
+    @GetMapping("/paged") // solicitud GET, obtener datos
     @Override
-    public List<E> getAllPageable(Pageable page) {
+    public Page<E> getAllPageable(Pageable page) {
         try {
             log.info("Use API-REST getAllPageable");
             return service.getAllPageable(page);

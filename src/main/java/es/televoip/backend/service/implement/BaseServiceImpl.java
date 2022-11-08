@@ -7,13 +7,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
-@Transactional
+@Slf4j // nos permite enviar texto a la consola mediante "log"
+@Transactional // anotar que revierte los procesos en caso de falla en el ciclo del método
 @Service
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
 
@@ -30,14 +31,14 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
             return optional.get();
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
-            throw new Exception(e.getLocalizedMessage());
+            throw new Exception(e.getMessage());
         }
     }
 
     @Override
     public E setSave(E entity) throws Exception {
         try {
-            return baseRepository.insert(entity); ////////////////
+            return baseRepository.insert(entity);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());
@@ -48,7 +49,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     public E setUpdate(ID id, E entity) throws Exception {
         try {
             Optional<E> optional = baseRepository.findById(id);
-            E objectTmp = optional.get(); // comprobamos existe el objeto sino saltará error
+            E objectTmp = optional.get(); // Inicializamos el objeto, sino existe saltará error
             return baseRepository.save(entity);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
@@ -99,9 +100,9 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     }
 
     @Override
-    public List<E> getAllPageable(Pageable page) throws Exception {
+    public Page<E> getAllPageable(Pageable page) throws Exception {
         try {
-            return baseRepository.findAll(page).toList();
+            return baseRepository.findAll(page);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new Exception(e.getMessage());

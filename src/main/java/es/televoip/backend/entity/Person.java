@@ -48,18 +48,15 @@ public class Person extends Base {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
 
-    @Nonnull
-    private String occupation;
-
     private boolean important;
 
     // -------------------------------- //
     // Embebido no lleva la anotación @DBRef
-    private Address address; // es Embebido
+    private Address address; // es **Embebido**
 
     @DBRef(lazy = true)
     private Location location; // similar a One-To-One
 
     @DBRef(lazy = true)
-    private List<Book> books; // es como One-To-Many
+    private List<Book> books; // es como One-To-Many (también podría ser un Many-To-Many)
 }
