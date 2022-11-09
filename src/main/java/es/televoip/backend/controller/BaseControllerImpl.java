@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j // nos permite enviar texto a la consola mediante "log"
-//@Component // lo anoto como Component (permite a Spring detectar los beans y colocarlos dentro de su contexto para ser utilizados) **************************
+@Component // lo anoto como Component (permite a Spring detectar los beans y colocarlos dentro de su contexto para ser utilizados) **************************
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, String>> implements BaseController<E, String> {
 
     // @RequestParam y @PathVariable se pueden usar para extraer valores del URI de solicitud, pero son un poco diferentes.
