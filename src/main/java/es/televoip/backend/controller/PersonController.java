@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j // nos permite enviar texto a la consola mediante "log"
 public class PersonController extends BaseControllerImpl<Person, PersonServiceImpl> {
 
+    // @RequestParam y @PathVariable se pueden usar para extraer valores del URI de solicitud, pero son un poco diferentes.
+    // @RequestParam: extrae valores de la cadena de consulta, está codificado
+    // @PathVariable: extrae valores de la ruta URI, no está codificado
     @GetMapping("/search")
     public List<Person> search(@RequestParam String filter) {
         try {

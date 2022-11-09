@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 //@Component // lo anoto como Component (permite a Spring detectar los beans y colocarlos dentro de su contexto para ser utilizados) **************************
 public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, String>> implements BaseController<E, String> {
 
+    // @RequestParam y @PathVariable se pueden usar para extraer valores del URI de solicitud, pero son un poco diferentes.
+    // @RequestParam:s extrae valores de la cadena de consulta, está codificado
+    // @PathVariable: extrae valores de la ruta URI, no está codificado 
     @Autowired
     protected S service;
 

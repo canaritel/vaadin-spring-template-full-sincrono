@@ -3,7 +3,6 @@ package es.televoip.backend.entity.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
@@ -33,13 +32,8 @@ public class PersonDto {
 
     private LocalDate dateOfBirth;
 
-    @Pattern(regexp = "[0-9]{5}")
-    private String postalCode;
-
-    @NotNull(message = "No puede estar vacío")
-    @Size(min = 5, max = 60)
-    private String occupation;
-
     private boolean important;
 
+//    @Pattern(regexp = "[0-9]{5}")
+//    private String postalCode;
 }

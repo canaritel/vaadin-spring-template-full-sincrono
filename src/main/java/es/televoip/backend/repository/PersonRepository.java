@@ -13,10 +13,9 @@ public interface PersonRepository extends BaseRepository<Person, String> {
 
     Page<Person> findByFirstNameContainingOrLastNameContainingAllIgnoreCase(String name, String lastname, Pageable page);
 
+    //Métodos para contar registros de las Query!. Perfectos y rápidos
     Long countByFirstNameContainingOrLastNameContainingAllIgnoreCase(String name, String lastname);
 
-    //Método para comorobar su existe un dato específico
+    //Método para comorobar si existe un dato específico
     // boolean existByDni(String dni);
-    //Métodos para contar registros de las Query!. Perfectos y rápidos
-    // Long countByFirstNameContainingAllIgnoreCase(String name);
 }
