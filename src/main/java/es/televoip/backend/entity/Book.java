@@ -1,11 +1,15 @@
 package es.televoip.backend.entity;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +46,8 @@ public class Book extends Base {
     private String isbn;
 
     @NotNull(message = "No puede estar vacío")
+    @Past
+    //@Pattern(regexp = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[01])-(0[1-9]|[12][0-9]|3[01])$")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBook;
 
