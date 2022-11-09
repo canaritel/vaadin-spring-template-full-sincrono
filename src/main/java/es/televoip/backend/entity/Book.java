@@ -2,7 +2,11 @@ package es.televoip.backend.entity;
 
 import java.time.LocalDate;
 import java.util.List;
-import javax.annotation.Nonnull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,21 +30,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Document
 public class Book extends Base {
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 5, max = 80)
     private String title;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 5, max = 20)
     @Indexed(unique = true)
     private String isbn;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBook;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 5, max = 20)
     private String gender;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @Min(1)
+    @Max(1000000)
     private int pages;
 
     // ------------------- //

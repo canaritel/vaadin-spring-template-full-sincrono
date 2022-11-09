@@ -18,4 +18,6 @@ public interface PersonRepository extends BaseRepository<Person, String> {
 
     //Método para comorobar si existe un dato específico
     // boolean existByDni(String dni);
+    
+    // Implementar QUERYS para los DTO
 }

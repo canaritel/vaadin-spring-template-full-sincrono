@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PersonDtoToPerson implements IMapper<PersonDto, Person> {
-
+    
     @Override
     public Person map(PersonDto in) {
         Person person = new Person();
@@ -15,10 +15,14 @@ public class PersonDtoToPerson implements IMapper<PersonDto, Person> {
         person.setDni(in.getDni());
         person.setEmail(in.getEmail());
         person.setPhone(in.getPhone());
-        person.setImportant(in.isImportant());
         person.setDateOfBirth(in.getDateOfBirth());
-
+        person.setImportant(in.isImportant());
+        // Añadimos las relaciones
+        person.setAddress(in.getAddress());
+        person.setLocation(in.getLocation());
+        person.setBooks(in.getBooks());
+        
         return person;
     }
-
+    
 }

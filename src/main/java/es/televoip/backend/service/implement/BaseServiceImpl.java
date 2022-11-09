@@ -36,7 +36,7 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     }
 
     @Override
-    public E setSave(E entity) throws Exception {
+    public E setSave( E entity) throws Exception {
         try {
             return baseRepository.insert(entity);
         } catch (Exception e) {

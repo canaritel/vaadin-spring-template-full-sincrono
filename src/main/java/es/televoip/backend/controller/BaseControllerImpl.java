@@ -2,6 +2,7 @@ package es.televoip.backend.controller;
 
 import es.televoip.backend.entity.Base;
 import es.televoip.backend.exception.ControllerExceptions;
+import es.televoip.backend.mapper.PersonDtoToPerson;
 import es.televoip.backend.service.implement.BaseServiceImpl;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,9 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @Autowired
     protected S service;
 
+    @Autowired
+    private PersonDtoToPerson PersonMapper;
+
     @GetMapping("/{id}") // solicitud GET, obtener datos
     @Override
     public E getId(@PathVariable String id) {
@@ -35,7 +39,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getId {}", entity);
             return entity;
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getId method", HttpStatus.NOT_FOUND);
         }
     }
@@ -47,7 +51,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getAll");
             return service.getAll();
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getAll method", HttpStatus.NOT_FOUND);
         }
     }
@@ -59,7 +63,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST getAllPageable");
             return service.getAllPageable(page);
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in getAllPageable method", HttpStatus.NOT_FOUND);
         }
     }
@@ -71,7 +75,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST save {}", entity);
             service.setSave(entity);
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
         }
     }
@@ -83,7 +87,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST update {}", entity);
             service.setUpdate(id, entity);
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in update method", HttpStatus.NOT_FOUND);
         }
     }
@@ -96,7 +100,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
             log.info("Use API-REST delete {}", entity);
             service.setDelete(id);
         } catch (Exception e) {
-            log.error(e.getLocalizedMessage());
+            //log.error(e.getLocalizedMessage());
             throw new ControllerExceptions("Error in delete method", HttpStatus.NOT_FOUND);
         }
     }
