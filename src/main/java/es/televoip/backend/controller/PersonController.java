@@ -4,6 +4,7 @@ import es.televoip.backend.entity.Person;
 import es.televoip.backend.exception.ControllerExceptions;
 import es.televoip.backend.service.implement.PersonServiceImpl;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,25 +29,29 @@ public class PersonController extends BaseControllerImpl<Person, PersonServiceIm
     // @RequestParam: extrae valores de la cadena de consulta, está codificado
     // @PathVariable: extrae valores de la ruta URI, no está codificado
     @GetMapping("/search")
-    public List<Person> search(@RequestParam String filter) {
+    public List<Person> search(@RequestParam String filter, HttpServletRequest request) {
         try {
-            log.info("Use API-REST search[Person]");
+            log.info("API-REST search[Person] {} {}", this.service, request.getRemoteHost());
             return service.search(filter);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
-            throw new ControllerExceptions("Error in search method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in search method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @GetMapping("/searchPaged")
-    public Page<Person> searchPageable(@RequestParam String filter, Pageable page) {
+    public Page<Person> searchPageable(@RequestParam String filter, Pageable page, HttpServletRequest request) {
         try {
-            log.info("Use API-REST searchPageable[Person]");
+            log.info("API-REST searchPageable[Person] {} {}", this.service, request.getRemoteHost());
             return service.searchPageable(filter, page);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
-            throw new ControllerExceptions("Error in search method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in search method", HttpStatus.NOT_FOUND, requestError(request));
         }
+    }
+
+    private String requestError(HttpServletRequest request) {
+        return request.getRequestURI() + " | " + request.getRemoteHost();
     }
 
 }

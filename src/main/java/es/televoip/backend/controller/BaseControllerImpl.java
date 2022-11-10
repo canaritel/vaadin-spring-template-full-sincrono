@@ -5,6 +5,7 @@ import es.televoip.backend.exception.ControllerExceptions;
 import es.televoip.backend.mapper.PersonDtoToPerson;
 import es.televoip.backend.service.implement.BaseServiceImpl;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,72 +52,82 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     /*
     ****************  Fin Método EJEMPLO **************
      */
+    //
+    /*
+    ** Para controlar la seguridad de las API hacemos uso de HttpServletRequest
+    ** Nos permitirá conocer información como la URL y Host de quien no hace peticiones
+    ** En caso de detectar muchas peticiones desde el mismo Host podemos "bloquear"
+     */
     @GetMapping("/{id}") // solicitud GET, obtener datos
     @Override
-    public E getId(@PathVariable String id) {
+    public E getId(@PathVariable String id, HttpServletRequest request) {
         try {
             E entity = service.getById(id);
-            log.info("Use API-REST getId {}", entity);
+            log.info("API-REST getId {} {}", request.getRequestURI(), request.getRemoteHost());
             return entity;
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in getId method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in getId method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @GetMapping("") // solicitud GET, obtener datos
     @Override
-    public List<E> getAll() {
+    public List<E> getAll(HttpServletRequest request) {
         try {
-            log.info("Use API-REST getAll {}", this.service);
+            log.info("API-REST getAll {} {}", this.service, request.getRemoteHost());
             return service.getAll();
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in getAll method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in getAll method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @GetMapping("/paged") // solicitud GET, obtener datos
     @Override
-    public Page<E> getAllPageable(Pageable page) {
+    public Page<E> getAllPageable(Pageable page, HttpServletRequest request) {
         try {
-            log.info("Use API-REST getAllPageable {}", this.service);
+            log.info("API-REST getAllPageable {} {}", this.service, request.getRemoteHost());
             return service.getAllPageable(page);
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in getAllPageable method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in getAllPageable method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @PostMapping("") // solicitud POST, enviar datos
     @Override
-    public void save(@RequestBody E entity) {
+    public void save(@RequestBody E entity, HttpServletRequest request) {
         try {
-            log.info("Use API-REST save {}", entity);
+            log.info("API-REST save {} {}", entity, request.getRemoteHost());
             service.setSave(entity);
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in save method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @PutMapping("/{id}") // solicitud PUT, actualizar datos
     @Override
-    public void update(@PathVariable String id, @RequestBody E entity) {
+    public void update(@PathVariable String id, @RequestBody E entity, HttpServletRequest request) {
         try {
-            log.info("Use API-REST update {}", entity);
+            log.info("API-REST update {} {}", entity, request.getRemoteHost());
             service.setUpdate(id, entity);
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in update method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in update method", HttpStatus.NOT_FOUND, requestError(request));
         }
     }
 
     @DeleteMapping("/{id}") // solicitud DELETE, eliminar datos
     @Override
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable String id, HttpServletRequest request) {
         try {
             E entity = service.getById(id);
-            log.info("Use API-REST delete {}", entity);
+            log.info("API-REST delete {} {}", entity, request.getRemoteHost());
             service.setDelete(id);
         } catch (Exception e) {
-            throw new ControllerExceptions("Error in delete method", HttpStatus.NOT_FOUND);
+            throw new ControllerExceptions("Error in delete method", HttpStatus.NOT_FOUND, requestError(request));
         }
+    }
+
+    private String requestError(HttpServletRequest request) {
+        return request.getRequestURI() + " | " + request.getRemoteHost();
     }
 
 }
