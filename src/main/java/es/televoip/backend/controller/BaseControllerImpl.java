@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j // nos permite enviar texto a la consola mediante "log"
 @Component // lo anoto como Component (permite a Spring detectar los beans y colocarlos dentro de su contexto para ser utilizados) **************************
@@ -31,6 +33,24 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     @Autowired
     private PersonDtoToPerson PersonMapper;
 
+    /*
+    ** Método de EJEMPLO con los tipos de inyecciones de parámetros **
+    ** En las peticiones nos llegan datos: en Cabecera, en URL, como Parámetros o en el Cuerpo
+     */
+    @GetMapping("/echo/{id}")
+    public String echo(
+            @RequestHeader(value = "token", required = false) String token,
+            @PathVariable(value = "id") int id,
+            @RequestParam(defaultValue = "Non") String param,
+            @RequestBody(required = false) String body) {
+        String response = "{\"id\":%d,\"token\":\"%s\",\"param\":\"%s\",\"body\":\"%s\"}";
+        log.info(String.format(response, id, token, param, body) + "{}", this.service);
+        return String.format(response, id, token, param, body);
+    }
+
+    /*
+    ****************  Fin Método EJEMPLO **************
+     */
     @GetMapping("/{id}") // solicitud GET, obtener datos
     @Override
     public E getId(@PathVariable String id) {
