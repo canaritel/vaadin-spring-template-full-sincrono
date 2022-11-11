@@ -1,8 +1,10 @@
 package es.televoip.backend.entity.dto;
 
-import es.televoip.backend.entity.Address;
+import es.televoip.backend.entity.embeded.Address;
 import es.televoip.backend.entity.Book;
-import es.televoip.backend.entity.Location;
+import es.televoip.backend.entity.City;
+import es.televoip.backend.entity.Country;
+import es.televoip.backend.entity.embeded.UserAccess;
 import java.time.LocalDate;
 import java.util.List;
 import javax.validation.constraints.Email;
@@ -45,11 +47,11 @@ public class PersonDto {
 
     private boolean important;
 
-//    @Pattern(regexp = "[0-9]{5}")
-//    private String postalCode;
     // Objetos de las Relaciones 
+    private UserAccess userAccess;
     private Address address;
-    private Location location;
+    private City city;
+    private Country country;
     private List<Book> books;
 
 }

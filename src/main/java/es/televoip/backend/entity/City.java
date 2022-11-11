@@ -21,21 +21,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder  // se utiliza en clases, constructores y métodos para proporcionarle API de compilador complejas
 @EqualsAndHashCode(callSuper = false)
 @Document
-public class Author extends Base {
+public class City extends Base {
 
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
-    @Size(min = 4, max = 50)
-    private String firstName;
-
-    @NotNull(message = "No puede estar vacío")
-    @NotBlank(message = "Este campo es requerido")
-    @Size(min = 4, max = 80)
-    private String lastName;
-
-    @NotNull(message = "No puede estar vacío")
-    @NotBlank(message = "Este campo es requerido")
-    @Size(min = 10, max = 8000)
-    private String biografia;
+    @Size(min = 4, max = 40)
+    private String city;
 
 }

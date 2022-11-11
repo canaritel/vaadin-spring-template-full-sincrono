@@ -1,6 +1,10 @@
-package es.televoip.backend.entity;
+package es.televoip.backend.entity.embeded;
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +21,16 @@ import lombok.NoArgsConstructor;
 @Builder  // se utiliza en clases, constructores y métodos para proporcionarle API de compilador complejas
 public class Address {  //No lo hacemos que extienda de Base al ser **Embebido**
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 100)
     private String street;
 
-    @Nonnull
-    private int number;
-
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @Min(10000)
+    @Max(99999)
     private int postalCode;
 
+    // @Pattern(regexp = "[0-9]{5}")
+    // private String postalCode;
 }

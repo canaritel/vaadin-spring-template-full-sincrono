@@ -1,7 +1,7 @@
 package es.televoip.backend.service;
 
-import es.televoip.backend.entity.Location;
+import es.televoip.backend.entity.City;
 
-public interface LocationService extends BaseService<Location, String> {
+public interface LocationService extends BaseService<City, String> {
 
 }

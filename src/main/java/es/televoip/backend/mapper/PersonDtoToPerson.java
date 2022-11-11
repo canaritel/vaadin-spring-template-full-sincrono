@@ -18,8 +18,10 @@ public class PersonDtoToPerson implements IMapper<PersonDto, Person> {
         person.setDateOfBirth(in.getDateOfBirth());
         person.setImportant(in.isImportant());
         // Añadimos las relaciones
+        person.setUserAccess(in.getUserAccess());
         person.setAddress(in.getAddress());
-        person.setLocation(in.getLocation());
+        person.setCity(in.getCity());
+        person.setCountry(in.getCountry());
         person.setBooks(in.getBooks());
         
         return person;

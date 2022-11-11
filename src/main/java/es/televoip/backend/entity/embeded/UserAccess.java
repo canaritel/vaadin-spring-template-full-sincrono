@@ -1,41 +1,37 @@
-package es.televoip.backend.entity;
+package es.televoip.backend.entity.embeded;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import es.televoip.backend.entity.enums.Role;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.Indexed;
 
-
-/*
-*** Más información sobre Auditable en este enlace:
-*** https://medium.com/codex/spring-data-mongodb-auditing-b4a874442a6
- */
 @Data  // es equivalente a usar @ToString, @EqualsAndHashCode, @Getter, @Setter, @RequiredArgsConstrutor al mismo tiempo
 @NoArgsConstructor  // genera un constructor sin parámetros
 @AllArgsConstructor  // genera un constructor con un parámetro para cada campo en su clase
 @Builder  // se utiliza en clases, constructores y métodos para proporcionarle API de compilador complejas
-@EqualsAndHashCode(callSuper = false)
-@Document
-public class Author extends Base {
+public class UserAccess {
+
+    // Documento embebido, no requiero declarar id
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 20)
+    @Indexed(unique = true)
+    private String username;
 
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
-    @Size(min = 4, max = 50)
-    private String firstName;
+    @Size(min = 4, max = 64)
+    @JsonIgnore
+    private String hashedPassword;
 
     @NotNull(message = "No puede estar vacío")
-    @NotBlank(message = "Este campo es requerido")
-    @Size(min = 4, max = 80)
-    private String lastName;
-
-    @NotNull(message = "No puede estar vacío")
-    @NotBlank(message = "Este campo es requerido")
-    @Size(min = 10, max = 8000)
-    private String biografia;
+    private Role roles;
+    //private Set<Role> roles;
 
 }

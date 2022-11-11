@@ -9,14 +9,10 @@ public enum Role {
     // 4. USER: se refiere al usuario final
     USER("user"), MANAGER("manager"), ADMIN("admin"), SUPERADMIN("superadmin");
 
-    private final String roleName;
+    public final String roleName;
 
     private Role(String roleName) {
         this.roleName = roleName;
-    }
-
-    public String getRoleName() {
-        return roleName;
     }
 
 }

@@ -14,7 +14,6 @@ public interface BaseController<E extends Base, ID extends Serializable> {
     /*
     ** Para controlar la seguridad de las API hacemos uso de HttpServletRequest
     ** Nos permitirá conocer información como la URL y Host de quien no hace peticiones
-    ** En caso de detectar muchas peticiones desde el mismo Host podemos "bloquear"
      */
     public E getId(@PathVariable ID id, HttpServletRequest request);
 

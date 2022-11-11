@@ -1,6 +1,8 @@
 package es.televoip.backend.entity;
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,12 +21,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder  // se utiliza en clases, constructores y métodos para proporcionarle API de compilador complejas
 @EqualsAndHashCode(callSuper = false)
 @Document
-public class Location extends Base {
+public class Country extends Base {
 
-    @Nonnull
-    private String city;
-
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 40)
     private String country;
 
 }

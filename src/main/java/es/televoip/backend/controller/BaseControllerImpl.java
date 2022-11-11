@@ -56,7 +56,6 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     /*
     ** Para controlar la seguridad de las API hacemos uso de HttpServletRequest
     ** Nos permitirá conocer información como la URL y Host de quien no hace peticiones
-    ** En caso de detectar muchas peticiones desde el mismo Host podemos "bloquear"
      */
     @GetMapping("/{id}") // solicitud GET, obtener datos
     @Override

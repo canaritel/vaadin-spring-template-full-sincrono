@@ -1,9 +1,14 @@
 package es.televoip.backend.entity;
 
+import es.televoip.backend.entity.embeded.Address;
+import es.televoip.backend.entity.embeded.UserAccess;
+import es.televoip.backend.entity.enums.Gender;
 import java.time.LocalDate;
 import java.util.List;
-import javax.annotation.Nonnull;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,35 +32,54 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Document
 public class Person extends Base {
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 60)
     private String firstName;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 80)
     private String lastName;
 
-    @Nonnull
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 9, max = 9)
     @Indexed(unique = true)
     private String dni;
 
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 4, max = 60)
     @Email
-    @Nonnull
     @Indexed(unique = true)
     private String email;
 
-    @Nonnull
+    private Gender gender;
+
+    @NotNull(message = "No puede estar vacío")
+    @NotBlank(message = "Este campo es requerido")
+    @Size(min = 9, max = 17)
     private String phone;
 
+    @Size(min = 12, max = 12)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
 
-    private boolean important;
+    @Builder.Default
+    private boolean important = false;
 
     // -------------------------------- //
     // Embebido no lleva la anotación @DBRef
+    private UserAccess userAccess; // es **Embebido**
+
     private Address address; // es **Embebido**
 
     @DBRef(lazy = true)
-    private Location location; // similar a One-To-One
+    private City city; // similar a One-To-One
+
+    @DBRef(lazy = true)
+    private Country country; // similar a One-To-One
 
     @DBRef(lazy = true)
     private List<Book> books; // es como One-To-Many (también podría ser un Many-To-Many)
