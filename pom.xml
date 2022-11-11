@@ -70,12 +70,10 @@
             <groupId>com.vaadin</groupId>
             <!-- Replace artifactId with vaadin-core to use only free components -->
             <artifactId>vaadin</artifactId>
-            <version>${vaadin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
-            <version>${vaadin.version}</version>
         </dependency>
                
         <dependency>
@@ -120,7 +118,6 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-testbench</artifactId>
             <scope>test</scope>
-            <version>${vaadin.version}</version>
         </dependency>
         <!-- Include JUnit 4 support for TestBench and others -->
         <dependency>

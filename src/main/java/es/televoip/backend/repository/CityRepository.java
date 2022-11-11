@@ -4,6 +4,6 @@ import es.televoip.backend.entity.City;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocationRepository extends BaseRepository<City, String> {
+public interface CityRepository extends BaseRepository<City, String> {
 
 }
