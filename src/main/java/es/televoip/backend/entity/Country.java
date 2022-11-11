@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -26,6 +27,7 @@ public class Country extends Base {
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
     @Size(min = 4, max = 40)
+    @Indexed(unique = true)
     private String country;
 
 }

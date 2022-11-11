@@ -43,8 +43,6 @@ public class Book extends Base {
     private String isbn;
 
     @NotNull(message = "No puede estar vacío")
-    @Past
-    //@Pattern(regexp = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[01])-(0[1-9]|[12][0-9]|3[01])$")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBook;
 

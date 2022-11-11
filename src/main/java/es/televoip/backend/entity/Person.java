@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +63,8 @@ public class Person extends Base {
     @Size(min = 9, max = 17)
     private String phone;
 
-    @Size(min = 12, max = 12)
+    @NotNull(message = "No puede estar vacío")
+    @Past
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
 

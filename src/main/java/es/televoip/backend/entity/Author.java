@@ -26,12 +26,12 @@ public class Author extends Base {
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
     @Size(min = 4, max = 50)
-    private String firstName;
+    private String firstNameAuthor;
 
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
     @Size(min = 4, max = 80)
-    private String lastName;
+    private String lastNameAuthor;
 
     @NotNull(message = "No puede estar vacío")
     @NotBlank(message = "Este campo es requerido")
