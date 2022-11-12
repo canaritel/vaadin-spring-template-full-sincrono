@@ -34,16 +34,20 @@ public class MainView extends AppLayout {
 
     private final Tabs menu;
     private final Tabs menu2;
+    private final Tabs tabs1;
+    private final Tabs tabs2;
     private final Span viewTitle = new Span(); // creamos componente título de Página
-    private Tabs tabs1;
-    private Tabs tabs2;
     private final String TEXT_LOGO = "Proyecto Síncrono";
 
     public MainView() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
-        menu = createMenu();
-        menu2 = createMenu2();
+
+        tabs1 = createMenu(createMenuItems(), true);
+        tabs2 = createMenu(createMenuItems2(), false);
+        menu = tabs1;
+        menu2 = tabs2;
+
         addToDrawer(createDrawerContent(menu));
         addToDrawer(createDrawerContent2(menu2));
     }
@@ -137,21 +141,17 @@ public class MainView extends AppLayout {
         return layout;
     }
 
-    private Tabs createMenu() {
+    /*
+    private Tabs createMenu(Component[] components, boolean status) {
         tabs1 = new Tabs();
-        tabs1.setOrientation(Tabs.Orientation.VERTICAL);
-        tabs1.setId("tabs");
-        tabs1.add(createMenuItems()); // añadimos los items del menu1
+        tabs1 = CreateMenuTabs(components, status);
         return tabs1;
     }
-
-    private Tabs createMenu2() {
-        tabs2 = new Tabs();
-        tabs2.setOrientation(Tabs.Orientation.VERTICAL);
-        tabs2.setId("tabs");
-        tabs2.setAutoselect(false); // no permitimos se auotoseleccione
-        tabs2.add(createMenuItems2()); // añadimos los items del menu2
-        return tabs2;
+     */
+    private Tabs createMenu(Component[] components, boolean status) {
+        Tabs tabs = new Tabs();
+        tabs = CreateMenuTabs(components, status);
+        return tabs;
     }
 
     private Component[] createMenuItems() {
@@ -173,6 +173,15 @@ public class MainView extends AppLayout {
         tab.add(new RouterLink(text, navigationTarget));
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
+    }
+
+    public Tabs CreateMenuTabs(Component[] component, boolean status) {
+        Tabs tabs = new Tabs();
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        tabs.setId("tabs");
+        tabs.setAutoselect(status); // no permitimos se auotoseleccione
+        tabs.add(component); // añadimos los items del menu1
+        return tabs;
     }
 
     @Override
