@@ -32,8 +32,6 @@ import java.util.Optional;
 
 public class MainView extends AppLayout {
 
-    private final Tabs menu;
-    private final Tabs menu2;
     private final Tabs tabs1;
     private final Tabs tabs2;
     private final Span viewTitle = new Span(); // creamos componente título de Página
@@ -45,11 +43,9 @@ public class MainView extends AppLayout {
 
         tabs1 = createMenu(createMenuItems(), true);
         tabs2 = createMenu(createMenuItems2(), false);
-        menu = tabs1;
-        menu2 = tabs2;
 
-        addToDrawer(createDrawerContent(menu));
-        addToDrawer(createDrawerContent2(menu2));
+        addToDrawer(createDrawerContent(tabs1));
+        addToDrawer(createDrawerContent2(tabs2));
     }
 
     private Component createHeaderContent() {
@@ -141,14 +137,8 @@ public class MainView extends AppLayout {
         return layout;
     }
 
-    /*
     private Tabs createMenu(Component[] components, boolean status) {
-        tabs1 = new Tabs();
-        tabs1 = CreateMenuTabs(components, status);
-        return tabs1;
-    }
-     */
-    private Tabs createMenu(Component[] components, boolean status) {
+        @SuppressWarnings("UnusedAssignment")
         Tabs tabs = new Tabs();
         tabs = CreateMenuTabs(components, status);
         return tabs;
@@ -188,7 +178,7 @@ public class MainView extends AppLayout {
     protected void afterNavigation() {
         super.afterNavigation();
         // cuando regresamos de una ventana nos continua en el último tab abierto
-        getTabForComponent(getContent()).ifPresent(menu::setSelectedTab);
+        // getTabForComponent(getContent()).ifPresent(tabs1::setSelectedTab);
         // establecemos el título de cada View como texto superior
         getCurrentPageTitle();
         // establecemos la selección de tabs, pudiendo saltar entre distintos menus de tabs
@@ -197,7 +187,7 @@ public class MainView extends AppLayout {
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
-        return menu.getChildren().filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
+        return tabs1.getChildren().filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
                 .findFirst().map(Tab.class::cast);
     }
 
@@ -211,17 +201,9 @@ public class MainView extends AppLayout {
     }
 
     private void selectionMenuAndTabs() {
-        // Creamos listener para que desactiven el menú que no está activo
-        menu.addSelectedChangeListener(event -> {
-            menu2.setSelectedTab(null);
-        });
-
-        menu2.addSelectedChangeListener(event -> {
-            menu.setSelectedTab(null);
-        });
-
         // Creamos listener para que solo activen el grupo tabs seleccionado
         tabs1.addSelectedChangeListener(event -> {
+            tabs2.setSelectedTab(null);
             try {
                 tabs1.setSelectedTab(event.getSelectedTab());
             } catch (Exception e) {
@@ -229,6 +211,7 @@ public class MainView extends AppLayout {
         });
 
         tabs2.addSelectedChangeListener(event -> {
+            tabs1.setSelectedTab(null);
             try {
                 tabs2.setSelectedTab(event.getSelectedTab());
             } catch (Exception e) {
