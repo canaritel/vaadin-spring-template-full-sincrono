@@ -32,20 +32,23 @@ import java.util.Optional;
 
 public class MainView extends AppLayout {
 
-    private final Tabs tabs1;
-    private final Tabs tabs2;
+    private final Tabs groupTabs1;
+    private final Tabs groupTabs2;
     private final Span viewTitle = new Span(); // creamos componente título de Página
     private final String TEXT_LOGO = "Proyecto Síncrono";
 
     public MainView() {
+        // AppLayout es un componente para crear diseños de aplicaciones.
+        // El diseño consta de tres secciones: una barra de navegación horizontal (barra de navegación NAVBAR),
+        // un cajón de navegación plegable (DRAWER) y un área de contenido(CONTENT AREA)
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
 
-        tabs1 = createMenu(createMenuItems(), true);
-        tabs2 = createMenu(createMenuItems2(), false);
+        groupTabs1 = createMenu(createMenuItems(), true);
+        groupTabs2 = createMenu(createMenuItems2(), false);
 
-        addToDrawer(createDrawerContent(tabs1));
-        addToDrawer(createDrawerContent2(tabs2));
+        addToDrawer(createDrawerContent(groupTabs1));
+        addToDrawer(createDrawerContent2(groupTabs2));
     }
 
     private Component createHeaderContent() {
@@ -178,7 +181,7 @@ public class MainView extends AppLayout {
     protected void afterNavigation() {
         super.afterNavigation();
         // cuando regresamos de una ventana nos continua en el último tab abierto
-        // getTabForComponent(getContent()).ifPresent(tabs1::setSelectedTab);
+        // getTabForComponent(getContent()).ifPresent(groupTabs1::setSelectedTab);
         // establecemos el título de cada View como texto superior
         getCurrentPageTitle();
         // establecemos la selección de tabs, pudiendo saltar entre distintos menus de tabs
@@ -187,7 +190,7 @@ public class MainView extends AppLayout {
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
-        return tabs1.getChildren().filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
+        return groupTabs1.getChildren().filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
                 .findFirst().map(Tab.class::cast);
     }
 
@@ -202,18 +205,18 @@ public class MainView extends AppLayout {
 
     private void selectionMenuAndTabs() {
         // Creamos listener para que solo activen el grupo tabs seleccionado
-        tabs1.addSelectedChangeListener(event -> {
-            tabs2.setSelectedTab(null);
+        groupTabs1.addSelectedChangeListener(event -> {
+            groupTabs2.setSelectedTab(null);
             try {
-                tabs1.setSelectedTab(event.getSelectedTab());
+                groupTabs1.setSelectedTab(event.getSelectedTab());
             } catch (Exception e) {
             }
         });
 
-        tabs2.addSelectedChangeListener(event -> {
-            tabs1.setSelectedTab(null);
+        groupTabs2.addSelectedChangeListener(event -> {
+            groupTabs1.setSelectedTab(null);
             try {
-                tabs2.setSelectedTab(event.getSelectedTab());
+                groupTabs2.setSelectedTab(event.getSelectedTab());
             } catch (Exception e) {
             }
         });
